@@ -1,0 +1,129 @@
+Berikut adalah **Product Requirements Document (PRD)** lengkap yang dirancang khusus untuk tugas kuliah. Dokumen ini dibuat sederhana, terstruktur, dan siap diimplementasikan tanpa perlu infrastruktur rumit.
+
+---
+# 📄 PRD: SPK Pemilihan Monitor Terbaik dengan Metode SAW
+
+## 1. Informasi Proyek
+| Item | Keterangan |
+|------|------------|
+| **Nama Aplikasi** | `MonitorChoice SPK` |
+| **Platform** | Web (Responsive) |
+| **Metode** | Simple Additive Weighting (SAW) |
+| **Data** | Dummy (10 item monitor) |
+| **Target Penggunaan** | Tugas Kuliah / Sistem Pendukung Keputusan Sederhana |
+| **Bahasa** | Indonesia |
+
+## 2. Latar Belakang & Tujuan
+### 📌 Latar Belakang
+Mahasiswa/konsumen sering kesulitan memilih monitor karena banyaknya varian dengan spesifikasi berbeda. Perbandingan manual bersifat subjektif dan tidak terstruktur.
+
+### 🎯 Tujuan
+Membuat aplikasi web sederhana yang mampu memberikan rekomendasi monitor terbaik secara objektif menggunakan metode SAW, dengan data dummy sebanyak 10 item.
+
+## 3. Ruang Lingkup
+### ✅ In-Scope
+- Tampilan tabel data monitor dummy (10 item)
+- Input bobot kriteria (bisa default atau diatur user)
+- Proses perhitungan SAW otomatis (Normalisasi → Pembobotan → Perankingan)
+- Tampilan hasil ranking & highlight rekomendasi terbaik
+- Desain responsif & sederhana (cocok untuk presentasi kuliah)
+
+### ❌ Out-of-Scope
+- Autentikasi user / login
+- Koneksi database real-time (data disimpan statis/JSON)
+- Integrasi harga toko online / API eksternal
+- Fitur wishlist, keranjang, atau pembayaran
+
+## 4. Pengguna Target
+- Mahasiswa (pengguna utama)
+- Dosen (penilai tugas)
+- Pengguna umum yang ingin belajar konsep SPK sederhana
+
+## 5. Metode SAW & Kriteria
+### 📐 Rumus SAW
+1. **Normalisasi Matriks (`R`)**
+   - Benefit: `R_ij = X_ij / Max(X_j)`
+   - Cost: `R_ij = Min(X_j) / X_ij`
+2. **Perhitungan Nilai Preferensi (`V`)**
+   - `V_i = Σ (W_j × R_ij)`
+3. **Perankingan** berdasarkan nilai `V` tertinggi ke terendah.
+
+### 📊 Kriteria & Bobot Default
+| Kode | Kriteria | Tipe | Bobot Default | Keterangan |
+|------|----------|------|---------------|------------|
+| C1 | Harga (Rp) | Cost | 0.25 | Semakin murah, semakin baik |
+| C2 | Resolusi (Skor 1-100) | Benefit | 0.25 | FHD=70, 2K=85, 4K=100 |
+| C3 | Refresh Rate (Hz) | Benefit | 0.20 | Semakin tinggi, semakin baik |
+| C4 | Ukuran Layar (Inci) | Benefit | 0.15 | Disesuaikan kebutuhan |
+| C5 | Garansi (Tahun) | Benefit | 0.15 | Semakin lama, semakin baik |
+| **Total** | | | **1.00** | |
+
+> 💡 *Catatan Tugas:* Bobot bisa dibuat statis di kode atau input manual via form. Untuk kemudahan presentasi, gunakan bobot default.
+
+## 6. Data Dummy (10 Monitor)
+```json
+[
+  {"id": 1, "nama": "ViewSonic VX2458", "harga": 1800000, "resolusi": 75, "refresh": 75, "ukuran": 24, "garansi": 2},
+  {"id": 2, "nama": "AOC 24G2SP", "harga": 2500000, "resolusi": 75, "refresh": 165, "ukuran": 24, "garansi": 2},
+  {"id": 3, "nama": "LG 27UP850", "harga": 4800000, "resolusi": 100, "refresh": 60, "ukuran": 27, "garansi": 3},
+  {"id": 4, "nama": "Xiaomi Mi 2K", "harga": 2900000, "resolusi": 85, "refresh": 75, "ukuran": 27, "garansi": 1},
+  {"id": 5, "nama": "Samsung Odyssey G3", "harga": 2300000, "resolusi": 75, "refresh": 144, "ukuran": 24, "garansi": 2},
+  {"id": 6, "nama": "Dell P2723D", "harga": 4200000, "resolusi": 85, "refresh": 60, "ukuran": 27, "garansi": 3},
+  {"id": 7, "nama": "Asus VG279Q1A", "harga": 3100000, "resolusi": 75, "refresh": 165, "ukuran": 27, "garansi": 2},
+  {"id": 8, "nama": "HP VH24", "harga": 1600000, "resolusi": 70, "refresh": 60, "ukuran": 24, "garansi": 1},
+  {"id": 9, "nama": "Philips 275E2FAE", "harga": 2700000, "resolusi": 85, "refresh": 75, "ukuran": 27, "garansi": 2},
+  {"id": 10, "nama": "BenQ GW2785TC", "harga": 3500000, "resolusi": 75, "refresh": 60, "ukuran": 27, "garansi": 3}
+]
+```
+> ⚠️ `resolusi` menggunakan skor 1-100 agar normalisasi lebih konsisten. Jika ingin pakai nilai asli (FHD/4K), konversi ke skor di awal proses.
+
+## 7. Arsitektur & Teknologi Rekomendasi
+| Layer | Teknologi | Alasan |
+|-------|-----------|--------|
+| Frontend | HTML5 + CSS3 + JavaScript (Vanilla) | Ringan, tidak butuh build step, mudah dipahami dosen |
+| UI Framework | Bootstrap 5 | Cepat, responsif, komponen tabel/form siap pakai |
+| Penyimpanan Data | `const monitors = [...]` (Array JS) / `data.json` | Cukup untuk tugas, tanpa setup database |
+| Hosting (Opsional) | GitHub Pages / Vercel / Netlify | Gratis, deploy 1 klik |
+
+> 📦 **Alternatif jika wajib pakai Backend:** PHP Native + MySQL (CRUD sederhana, tapi tidak wajib untuk tugas ini).
+
+## 8. Alur Pengguna (User Flow)
+```
+Landing Page → [Lihat Data Dummy] → [Atur Bobot (Opsional)] → Klik "Hitung SAW" 
+       → Tampil: Matriks Normalisasi → Nilai Preferensi (V) → Tabel Ranking 
+       → Highlight Monitor #1 → Export/Print (Opsional)
+```
+
+## 9. Persyaratan Fungsional
+| ID | Fitur | Deskripsi |
+|----|-------|-----------|
+| F1 | Tampil Data | Menampilkan 10 monitor dalam tabel responsif |
+| F2 | Input Bobot | Form input 5 bobot (validasi: total = 1.0) |
+| F3 | Kalkulasi SAW | Hitung normalisasi & pembobotan secara otomatis |
+| F4 | Tampil Hasil | Rank 1-10 dengan nilai `V`, warna hijau untuk #1 |
+| F5 | Detail Perhitungan | Tampilkan matriks `R` & `V` (bisa di-toggle untuk presentasi) |
+| F6 | Reset | Kembalikan bobot & hasil ke default |
+
+## 10. Persyaratan Non-Fungsional
+| Kategori | Syarat |
+|----------|--------|
+| Performa | Loading < 2 detik, kalkulasi < 0.5 detik |
+| Usability | UI bersih, label jelas, tooltip penjelasan SAW |
+| Responsif | Support desktop & mobile (Bootstrap grid) |
+| Maintainability | Kode terstruktur, komentar di bagian rumus SAW |
+| Keamanan | Tidak ada input sensitif, validasi bobot di frontend |
+
+## 11. Timeline Pengembangan (Estimasi 5-7 Hari)
+| Hari | Aktivitas |
+|------|-----------|
+| 1 | Setup project, struktur HTML, load data dummy |
+| 2 | UI Tabel + Form Bobot + Validasi |
+| 3 | Implementasi logika SAW (Normalisasi → Pembobotan → Ranking) |
+| 4 | Integrasi hasil ke UI, styling, responsive check |
+| 5 | Testing, fix bug, tambah komentar kode, siapkan slide presentasi |
+
+## 12. Asumsi & Batasan
+- Data bersifat dummy & statis, tidak terhubung ke toko online.
+- Bobot kriteria dianggap konstan selama sesi.
+- Normalisasi menggunakan Min-Max SAW standar.
+- Aplikasi tidak menyimpan riwayat perhitungan (stateless).
