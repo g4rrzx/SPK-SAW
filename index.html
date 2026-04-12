@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rekomendasi Monitor Terbaik SPK - SAW</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260412a" />
+</head>
+
+<body>
+  <main class="py-3 pb-5">
+    <div class="container app-main-container d-grid gap-4">
+      <section class="row g-4 align-items-stretch">
+        <div class="col-12 col-xl-8">
+          <article class="card shadow-sm h-100">
+            <div class="app-hero" id="hero-panel">
+              <span class="badge text-bg-light app-badge">SPK Tugas Kuliah</span>
+              <h1 class="display-6 fw-bold mb-0 app-title">Pemilihan Monitor SPK (Metode SAW)</h1>
+              <p class="mb-0 app-subtitle">
+                Rekomendasi monitor terbaik berbasis bobot kriteria dengan perhitungan transparan.
+              </p>
+            </div>
+            <div class="card-header bg-white border-0 pb-0">
+              <h2 class="h5 mb-1">Data Monitor</h2>
+              <p class="small text-secondary mb-0">10 Kandidat Monitor</p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle" id="monitors-table">
+                  <thead class="table-light">
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Nama</th>
+                      <th scope="col">Harga</th>
+                      <th scope="col">Resolusi</th>
+                      <th scope="col">Refresh</th>
+                      <th scope="col">Ukuran</th>
+                      <th scope="col">Garansi</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-12 col-xl-4">
+          <div class="d-grid gap-4 h-100">
+            <article class="card shadow-sm">
+              <div class="card-header bg-white border-0 pb-0">
+                <h2 class="h5 mb-1">Atur Bobot Kriteria</h2>
+                <p class="small text-secondary mb-0">Total bobot harus = 1.00</p>
+              </div>
+              <div class="card-body">
+                <div id="error-banner" class="alert alert-danger py-2 d-none" role="alert"></div>
+                <form id="weights-form" class="d-grid gap-3" novalidate>
+                  <div>
+                    <label class="form-label" for="weight-c1">C1 Harga (Cost)</label>
+                    <input id="weight-c1" name="c1" type="text" class="form-control" inputmode="decimal"
+                      aria-describedby="error-banner" aria-invalid="false" />
+                  </div>
+                  <div>
+                    <label class="form-label" for="weight-c2">C2 Resolusi (Benefit)</label>
+                    <input id="weight-c2" name="c2" type="text" class="form-control" inputmode="decimal"
+                      aria-describedby="error-banner" aria-invalid="false" />
+                  </div>
+                  <div>
+                    <label class="form-label" for="weight-c3">C3 Refresh Rate (Benefit)</label>
+                    <input id="weight-c3" name="c3" type="text" class="form-control" inputmode="decimal"
+                      aria-describedby="error-banner" aria-invalid="false" />
+                  </div>
+                  <div>
+                    <label class="form-label" for="weight-c4">C4 Ukuran Layar (Benefit)</label>
+                    <input id="weight-c4" name="c4" type="text" class="form-control" inputmode="decimal"
+                      aria-describedby="error-banner" aria-invalid="false" />
+                  </div>
+                  <div>
+                    <label class="form-label" for="weight-c5">C5 Garansi (Benefit)</label>
+                    <input id="weight-c5" name="c5" type="text" class="form-control" inputmode="decimal"
+                      aria-describedby="error-banner" aria-invalid="false" />
+                  </div>
+
+                  <div class="d-flex flex-wrap gap-2 pt-1">
+                    <button id="btn-calculate" type="submit" class="btn btn-primary flex-grow-1">Hitung SAW</button>
+                    <button id="btn-reset" type="button" class="btn btn-outline-secondary flex-grow-1">Reset</button>
+                  </div>
+                </form>
+              </div>
+            </article>
+
+            <article class="card shadow-sm">
+              <div class="card-header bg-white border-0 pb-0">
+                <h2 class="h5 mb-1">Rekomendasi Terbaik</h2>
+              </div>
+              <div class="card-body">
+                <p id="top-recommendation" class="fw-semibold mb-0 text-secondary">Belum ada hasil perhitungan.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="card shadow-sm">
+        <div
+          class="card-header bg-white border-0 pb-0 d-flex flex-wrap justify-content-between align-items-start gap-2">
+          <div>
+            <h2 class="h5 mb-1">Hasil Ranking</h2>
+            <p class="small text-secondary mb-0">Urut berdasarkan nilai preferensi tertinggi.</p>
+          </div>
+          <button id="toggle-details" class="btn btn-sm btn-outline-primary" type="button"
+            aria-controls="calculation-details" aria-expanded="false">Tampilkan Detail Perhitungan</button>
+        </div>
+        <div class="card-body d-grid gap-4">
+          <div class="table-responsive">
+            <table class="table align-middle" id="ranking-table">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">Rank</th>
+                  <th scope="col">Nama Monitor</th>
+                  <th scope="col">Nilai V</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div id="calculation-details" class="d-none d-grid gap-4">
+            <section>
+              <h3 class="h6 mb-2">Matriks Normalisasi (R)</h3>
+              <div class="table-responsive">
+                <table class="table table-sm table-bordered" id="normalization-table">
+                  <thead class="table-light">
+                    <tr>
+                      <th>ID</th>
+                      <th>Nama</th>
+                      <th>C1</th>
+                      <th>C2</th>
+                      <th>C3</th>
+                      <th>C4</th>
+                      <th>C5</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </section>
+
+            <section>
+              <h3 class="h6 mb-2">Nilai Preferensi (V)</h3>
+              <div class="table-responsive">
+                <table class="table table-sm table-bordered" id="preference-table">
+                  <thead class="table-light">
+                    <tr>
+                      <th>ID</th>
+                      <th>Nama</th>
+                      <th>Nilai V</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="assets/js/app.js?v=20260412a"></script>
+</body>
+
+</html>
