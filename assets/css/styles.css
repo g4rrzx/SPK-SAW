@@ -14,6 +14,18 @@ body {
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--app-bg);
   color: #0f172a;
+  overflow-x: hidden;
+}
+
+.app-main-container .row > [class*="col-"] {
+  min-width: 0;
+}
+
+.table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .app-hero {
@@ -97,6 +109,23 @@ body {
   .app-main-container {
     padding-left: 0.9rem;
     padding-right: 0.9rem;
+  }
+
+  #monitors-table,
+  #ranking-table,
+  #normalization-table,
+  #preference-table {
+    font-size: 0.92rem;
+  }
+
+  #monitors-table {
+    min-width: 680px;
+  }
+
+  #ranking-table,
+  #normalization-table,
+  #preference-table {
+    min-width: 420px;
   }
 
   .card {
