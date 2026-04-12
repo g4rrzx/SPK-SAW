@@ -40,6 +40,11 @@ test("hero header menyatu dengan kartu data monitor", () => {
   );
 });
 
+test("menampilkan identitas mahasiswa dan judul tugas", () => {
+  assert.match(html, /Rekomendasi Monitor Terbaik metode SPK/);
+  assert.match(html, /Tegar Andriyansyah\s*-\s*231011402038/);
+});
+
 test("tabel utama dibungkus table-responsive", () => {
   const wrappers = html.match(/<div class="table-responsive">/g) ?? [];
   assert.ok(wrappers.length >= 3, "Expected minimal 3 table-responsive wrappers");
