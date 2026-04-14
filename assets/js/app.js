@@ -144,13 +144,13 @@ function renderMonitorsTable(data) {
     .map(
       (monitor) => `
       <tr>
-        <td>${monitor.id}</td>
-        <td>${monitor.nama}</td>
-        <td class="table-cell-nowrap">${formatterCurrency.format(monitor.harga)}</td>
-        <td class="table-cell-nowrap">${monitor.resolusi}</td>
-        <td class="table-cell-nowrap">${monitor.refresh} Hz</td>
-        <td class="table-cell-nowrap">${monitor.ukuran}”</td>
-        <td class="table-cell-nowrap">${monitor.garansi} tahun</td>
+        <td data-label="ID">${monitor.id}</td>
+        <td data-label="Nama">${monitor.nama}</td>
+        <td data-label="Harga" class="table-cell-nowrap">${formatterCurrency.format(monitor.harga)}</td>
+        <td data-label="Resolusi" class="table-cell-nowrap">${monitor.resolusi}</td>
+        <td data-label="Refresh" class="table-cell-nowrap">${monitor.refresh} Hz</td>
+        <td data-label="Ukuran" class="table-cell-nowrap">${monitor.ukuran}”</td>
+        <td data-label="Garansi" class="table-cell-nowrap">${monitor.garansi} tahun</td>
       </tr>
     `,
     )
@@ -162,9 +162,9 @@ function renderRankingTable(ranking) {
     .map(
       (row) => `
       <tr class="${row.rank === 1 ? "ranking-top" : ""}">
-        <td>${row.rank}</td>
-        <td>${row.nama}</td>
-        <td>${formatNumber(row.score)}</td>
+        <td data-label="Rank">${row.rank}</td>
+        <td data-label="Nama Monitor">${row.nama}</td>
+        <td data-label="Nilai V">${formatNumber(row.score)}</td>
       </tr>
     `,
     )
@@ -176,13 +176,13 @@ function renderNormalizationTable(normalized) {
     .map(
       (row) => `
       <tr>
-        <td>${row.id}</td>
-        <td>${row.nama}</td>
-        <td>${formatNumber(row.C1)}</td>
-        <td>${formatNumber(row.C2)}</td>
-        <td>${formatNumber(row.C3)}</td>
-        <td>${formatNumber(row.C4)}</td>
-        <td>${formatNumber(row.C5)}</td>
+        <td data-label="ID">${row.id}</td>
+        <td data-label="Nama">${row.nama}</td>
+        <td data-label="C1">${formatNumber(row.C1)}</td>
+        <td data-label="C2">${formatNumber(row.C2)}</td>
+        <td data-label="C3">${formatNumber(row.C3)}</td>
+        <td data-label="C4">${formatNumber(row.C4)}</td>
+        <td data-label="C5">${formatNumber(row.C5)}</td>
       </tr>
     `,
     )
@@ -194,9 +194,9 @@ function renderPreferenceTable(preferences) {
     .map(
       (row) => `
       <tr>
-        <td>${row.id}</td>
-        <td>${row.nama}</td>
-        <td>${formatNumber(row.score)}</td>
+        <td data-label="ID">${row.id}</td>
+        <td data-label="Nama">${row.nama}</td>
+        <td data-label="Nilai V">${formatNumber(row.score)}</td>
       </tr>
     `,
     )

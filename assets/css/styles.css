@@ -111,21 +111,83 @@ body {
     padding-right: 0.9rem;
   }
 
+  .app-title {
+    font-size: 1.35rem;
+    line-height: 1.28;
+  }
+
+  .app-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .app-identity {
+    font-size: 0.84rem;
+  }
+
   #monitors-table,
   #ranking-table,
   #normalization-table,
   #preference-table {
     font-size: 0.92rem;
+    min-width: 0;
   }
 
-  #monitors-table {
-    min-width: 680px;
+  .mobile-stacked-table {
+    border-collapse: separate;
+    border-spacing: 0;
   }
 
-  #ranking-table,
-  #normalization-table,
-  #preference-table {
-    min-width: 420px;
+  .mobile-stacked-table thead {
+    display: none;
+  }
+
+  .mobile-stacked-table,
+  .mobile-stacked-table tbody,
+  .mobile-stacked-table tr,
+  .mobile-stacked-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .mobile-stacked-table tbody tr {
+    margin-bottom: 0.7rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    background-color: #ffffff;
+    padding: 0.35rem 0.7rem;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+    overflow: hidden;
+  }
+
+  .mobile-stacked-table tbody tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .mobile-stacked-table tbody td {
+    border: 0;
+    border-bottom: 1px dashed #dbe4f0;
+    padding: 0.42rem 0;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    text-align: left;
+  }
+
+  .mobile-stacked-table tbody td:last-child {
+    border-bottom: 0;
+  }
+
+  .mobile-stacked-table tbody td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.76rem;
+    color: #64748b;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 0.08rem;
   }
 
   .card {
