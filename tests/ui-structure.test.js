@@ -72,5 +72,8 @@ test("memiliki media query mobile-first dan small-screen", () => {
 test("guard mobile overflow tersedia untuk tabel dan kolom", () => {
   assert.match(css, /\.app-main-container \.row > \[class\*=\"col-\"\] \{[\s\S]*min-width: 0;/);
   assert.match(css, /\.table-responsive \{[\s\S]*overflow-x: auto;/);
-  assert.match(css, /#monitors-table \{[\s\S]*min-width: 680px;/);
+  assert.match(css, /#monitors-table,[\s\S]*#preference-table \{[\s\S]*min-width: 0;/);
+  assert.match(css, /\.mobile-stacked-table thead \{[\s\S]*display: none;/);
+  assert.match(css, /\.mobile-stacked-table tbody td::before \{[\s\S]*content: attr\(data-label\);/);
+  assert.doesNotMatch(css, /min-width: 680px;/);
 });
