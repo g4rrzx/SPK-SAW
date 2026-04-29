@@ -69,6 +69,21 @@ test("memiliki media query mobile-first dan small-screen", () => {
   assert.match(css, /@media \(max-width: 575\.98px\)/);
 });
 
+test("memiliki pemilihan metode SAW dan WP", () => {
+  assert.match(html, /data-method="saw"[\s\S]*?aria-pressed="true"/);
+  assert.match(html, /data-method="wp"[\s\S]*?aria-pressed="false"/);
+  assert.match(html, /id="saw-details"/);
+  assert.match(html, /id="wp-details"/);
+  assert.match(html, /id="wp-weights-table"/);
+  assert.match(html, /id="wp-s-table"/);
+  assert.match(html, /id="wp-v-table"/);
+});
+
+test("indikator total bobot tersedia", () => {
+  assert.match(html, /id="weight-sum-indicator"/);
+  assert.match(html, /id="weight-sum-value"/);
+});
+
 test("guard mobile overflow tersedia untuk tabel dan kolom", () => {
   assert.match(css, /\.app-main-container \.row > \[class\*=\"col-\"\] \{[\s\S]*min-width: 0;/);
   assert.match(css, /\.table-responsive \{[\s\S]*overflow-x: auto;/);

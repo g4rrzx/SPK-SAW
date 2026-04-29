@@ -4,14 +4,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tegar Andriyansyah - Rekomendasi Monitor Terbaik metode SPK</title>
+  <title>Tegar Andriyansyah - Rekomendasi Monitor Terbaik metode SPK & WP</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260414a" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260428a" />
 </head>
 
 <body>
-  <main class="py-3 pb-5">
+  <main class="py-3 py-md-4 pb-5">
     <div class="container app-main-container d-grid gap-4">
       <section class="row g-4 align-items-stretch">
         <div class="col-12 col-xl-8">
@@ -21,12 +23,13 @@
               <h1 class="display-6 fw-bold mb-0 app-title">Rekomendasi Monitor Terbaik metode SPK</h1>
               <p class="mb-0 app-identity">Tegar Andriyansyah - 231011402038</p>
               <p class="mb-0 app-subtitle">
-                Rekomendasi monitor terbaik berbasis bobot kriteria dengan perhitungan transparan.
+                Mendukung metode <strong>SAW</strong>, <strong>WP</strong>, dan <strong>SMART</strong> dengan perhitungan transparan
+                & detail langkah-demi-langkah.
               </p>
             </div>
             <div class="card-header bg-white border-0 pb-0">
               <h2 class="h5 mb-1">Data Dummy Monitor</h2>
-              <p class="small text-secondary mb-0">10 data monitor sesuai PRD.</p>
+              <p class="small text-secondary mb-0">10 data monitor .</p>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -51,61 +54,86 @@
 
         <div class="col-12 col-xl-4">
           <div class="d-grid gap-4 h-100">
-            <article class="card shadow-sm">
+            <article class="card shadow-sm app-card">
               <div class="card-header bg-white border-0 pb-0">
                 <h2 class="h5 mb-1">Atur Bobot Kriteria</h2>
                 <p class="small text-secondary mb-0">Total bobot harus = 1.00</p>
               </div>
               <div class="card-body">
                 <div id="error-banner" class="alert alert-danger py-2 d-none" role="alert"></div>
+
+                <div class="method-switch mb-3" role="group" aria-label="Pilih metode perhitungan">
+                  <button type="button" class="method-pill active" data-method="saw"
+                    aria-pressed="true">SAW</button>
+                  <button type="button" class="method-pill" data-method="wp"
+                    aria-pressed="false">WP</button>
+                  <button type="button" class="method-pill" data-method="smart"
+                    aria-pressed="false">SMART</button>
+                </div>
+                <p class="small text-secondary method-desc mb-3" id="method-description">
+                  <strong>SAW</strong> — Simple Additive Weighting: normalisasi linier, lalu jumlah
+                  bobot×nilai.
+                </p>
+
                 <form id="weights-form" class="d-grid gap-3" novalidate>
-                  <div>
-                    <label class="form-label" for="weight-c1">C1 Harga (Cost)</label>
-                    <input id="weight-c1" name="c1" type="text" class="form-control" inputmode="decimal"
-                      aria-describedby="error-banner" aria-invalid="false" />
+                  <div class="row g-2">
+                    <div class="col-12 col-sm-6">
+                      <label class="form-label" for="weight-c1">C1 Harga (Cost)</label>
+                      <input id="weight-c1" name="c1" type="text" class="form-control" inputmode="decimal"
+                        aria-describedby="error-banner" aria-invalid="false" />
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <label class="form-label" for="weight-c2">C2 Resolusi (Benefit)</label>
+                      <input id="weight-c2" name="c2" type="text" class="form-control" inputmode="decimal"
+                        aria-describedby="error-banner" aria-invalid="false" />
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <label class="form-label" for="weight-c3">C3 Refresh Rate (Benefit)</label>
+                      <input id="weight-c3" name="c3" type="text" class="form-control" inputmode="decimal"
+                        aria-describedby="error-banner" aria-invalid="false" />
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <label class="form-label" for="weight-c4">C4 Ukuran (Benefit)</label>
+                      <input id="weight-c4" name="c4" type="text" class="form-control" inputmode="decimal"
+                        aria-describedby="error-banner" aria-invalid="false" />
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <label class="form-label" for="weight-c5">C5 Garansi (Benefit)</label>
+                      <input id="weight-c5" name="c5" type="text" class="form-control" inputmode="decimal"
+                        aria-describedby="error-banner" aria-invalid="false" />
+                    </div>
                   </div>
-                  <div>
-                    <label class="form-label" for="weight-c2">C2 Resolusi (Benefit)</label>
-                    <input id="weight-c2" name="c2" type="text" class="form-control" inputmode="decimal"
-                      aria-describedby="error-banner" aria-invalid="false" />
-                  </div>
-                  <div>
-                    <label class="form-label" for="weight-c3">C3 Refresh Rate (Benefit)</label>
-                    <input id="weight-c3" name="c3" type="text" class="form-control" inputmode="decimal"
-                      aria-describedby="error-banner" aria-invalid="false" />
-                  </div>
-                  <div>
-                    <label class="form-label" for="weight-c4">C4 Ukuran Layar (Benefit)</label>
-                    <input id="weight-c4" name="c4" type="text" class="form-control" inputmode="decimal"
-                      aria-describedby="error-banner" aria-invalid="false" />
-                  </div>
-                  <div>
-                    <label class="form-label" for="weight-c5">C5 Garansi (Benefit)</label>
-                    <input id="weight-c5" name="c5" type="text" class="form-control" inputmode="decimal"
-                      aria-describedby="error-banner" aria-invalid="false" />
+
+                  <div class="weight-sum-indicator" id="weight-sum-indicator" aria-live="polite">
+                    <span class="label">Total bobot:</span>
+                    <span class="value" id="weight-sum-value">0.00</span>
                   </div>
 
                   <div class="d-flex flex-wrap gap-2 pt-1">
-                    <button id="btn-calculate" type="submit" class="btn btn-primary flex-grow-1">Hitung SAW</button>
-                    <button id="btn-reset" type="button" class="btn btn-outline-secondary flex-grow-1">Reset</button>
+                    <button id="btn-calculate" type="submit" class="btn btn-primary flex-grow-1">Hitung
+                      SAW</button>
+                    <button id="btn-reset" type="button"
+                      class="btn btn-outline-secondary flex-grow-1">Reset</button>
                   </div>
                 </form>
               </div>
             </article>
 
-            <article class="card shadow-sm">
-              <div class="card-header bg-white border-0 pb-0">
+            <article class="card shadow-sm app-card top-rec-card">
+              <div class="card-header bg-white border-0 pb-0 d-flex align-items-center justify-content-between">
                 <h2 class="h5 mb-1">Rekomendasi Terbaik</h2>
+                <span class="badge bg-light text-dark border" id="top-method-badge">—</span>
               </div>
               <div class="card-body">
-                <p id="top-recommendation" class="fw-semibold mb-0 text-secondary">Belum ada hasil perhitungan.</p>
+                <p id="top-recommendation" class="fw-semibold mb-0 text-secondary">Belum ada hasil
+                  perhitungan.</p>
               </div>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="card shadow-sm">
+      <section class="card shadow-sm app-card">
         <div
           class="card-header bg-white border-0 pb-0 d-flex flex-wrap justify-content-between align-items-start gap-2">
           <div>
@@ -130,48 +158,217 @@
           </div>
 
           <div id="calculation-details" class="d-none d-grid gap-4">
-            <section>
-              <h3 class="h6 mb-2">Matriks Normalisasi (R)</h3>
-              <div class="table-responsive">
-                <table class="table table-sm table-bordered mobile-stacked-table" id="normalization-table">
-                  <thead class="table-light">
-                    <tr>
-                      <th>ID</th>
-                      <th>Nama</th>
-                      <th>C1</th>
-                      <th>C2</th>
-                      <th>C3</th>
-                      <th>C4</th>
-                      <th>C5</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
-              </div>
-            </section>
+            <!-- SAW DETAILS -->
+            <div id="saw-details" class="d-grid gap-4">
+              <section>
+                <h3 class="h6 mb-1">1. Nilai Maksimum / Minimum per Kriteria</h3>
+                <p class="small text-secondary mb-2">
+                  Digunakan untuk normalisasi: <code>R = Xij / max(Xj)</code> (benefit) atau
+                  <code>R = min(Xj) / Xij</code> (cost).
+                </p>
+                <div class="table-responsive">
+                  <table class="table table-sm table-bordered mobile-stacked-table" id="saw-stats-table">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Kriteria</th>
+                        <th>Tipe</th>
+                        <th>Max</th>
+                        <th>Min</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </section>
 
-            <section>
-              <h3 class="h6 mb-2">Nilai Preferensi (V)</h3>
-              <div class="table-responsive">
-                <table class="table table-sm table-bordered mobile-stacked-table" id="preference-table">
-                  <thead class="table-light">
-                    <tr>
-                      <th>ID</th>
-                      <th>Nama</th>
-                      <th>Nilai V</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
-              </div>
-            </section>
+              <section>
+                <h3 class="h6 mb-1">2. Matriks Normalisasi (R)</h3>
+                <p class="small text-secondary mb-2">Nilai ternormalisasi tiap alternatif.</p>
+                <div class="table-responsive">
+                  <table class="table table-sm table-bordered mobile-stacked-table" id="normalization-table">
+                    <thead class="table-light">
+                      <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>C1</th>
+                        <th>C2</th>
+                        <th>C3</th>
+                        <th>C4</th>
+                        <th>C5</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section>
+                <h3 class="h6 mb-1">3. Nilai Preferensi (V) = Σ (W × R)</h3>
+                <div class="table-responsive">
+                  <table class="table table-sm table-bordered mobile-stacked-table" id="preference-table">
+                    <thead class="table-light">
+                      <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Nilai V</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+
+            <!-- SMART DETAILS -->
+            <div id="smart-details" class="d-none d-grid gap-4">
+              <section>
+                <h3 class="h6 mb-1">1. Bobot Ternormalisasi (w')</h3>
+                <p class="small text-secondary mb-2">
+                  <code>w'j = wj / Σwk</code>. Bobot dipakai untuk menghitung skor akhir.
+                </p>
+                <div class="table-responsive">
+                  <table class="table table-sm table-bordered mobile-stacked-table" id="smart-weights-table">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Kriteria</th>
+                        <th>Tipe</th>
+                        <th>w</th>
+                        <th>w'</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section>
+                <h3 class="h6 mb-1">2. Nilai Min/Max & Matriks Utilitas (u)</h3>
+                <p class="small text-secondary mb-2">
+                  Benefit: <code>u = (Xij − min) / (max − min)</code>. Cost: <code>u = (max − Xij) / (max − min)</code>.
+                </p>
+                <div class="table-responsive">
+                  <table class="table table-sm table-bordered mobile-stacked-table" id="smart-stats-table">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Kriteria</th>
+                        <th>Tipe</th>
+                        <th>Max</th>
+                        <th>Min</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <div class="table-responsive mt-2">
+                  <table class="table table-sm table-bordered mobile-stacked-table" id="smart-utility-table">
+                    <thead class="table-light">
+                      <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>C1</th>
+                        <th>C2</th>
+                        <th>C3</th>
+                        <th>C4</th>
+                        <th>C5</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section>
+                <h3 class="h6 mb-1">3. Nilai Akhir V = Σ (w' × u)</h3>
+                <div class="table-responsive">
+                  <table class="table table-sm table-bordered mobile-stacked-table" id="smart-preference-table">
+                    <thead class="table-light">
+                      <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Nilai V</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+
+            <!-- WP DETAILS -->
+            <div id="wp-details" class="d-none d-grid gap-4">
+              <section>
+                <h3 class="h6 mb-1">1. Bobot Ternormalisasi & Pangkat</h3>
+                <p class="small text-secondary mb-2">
+                  <code>w'j = wj / Σwk</code>. Untuk kriteria <em>cost</em> pangkat dibalik menjadi negatif.
+                </p>
+                <div class="table-responsive">
+                  <table class="table table-sm table-bordered mobile-stacked-table" id="wp-weights-table">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Kriteria</th>
+                        <th>Tipe</th>
+                        <th>w</th>
+                        <th>w'</th>
+                        <th>Pangkat</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section>
+                <h3 class="h6 mb-1">2. Vektor S = Π (Xij ^ pangkat j)</h3>
+                <div class="table-responsive">
+                  <table class="table table-sm table-bordered mobile-stacked-table" id="wp-s-table">
+                    <thead class="table-light">
+                      <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>C1</th>
+                        <th>C2</th>
+                        <th>C3</th>
+                        <th>C4</th>
+                        <th>C5</th>
+                        <th>S</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <p class="small text-secondary mt-2 mb-0">
+                  ΣS = <span id="wp-sum-s" class="fw-semibold">—</span>
+                </p>
+              </section>
+
+              <section>
+                <h3 class="h6 mb-1">3. Vektor V = Si / ΣS</h3>
+                <div class="table-responsive">
+                  <table class="table table-sm table-bordered mobile-stacked-table" id="wp-v-table">
+                    <thead class="table-light">
+                      <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>S</th>
+                        <th>V</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
           </div>
         </div>
       </section>
+
+      <footer class="text-center small text-secondary pt-2">
+        Dibuat dengan Bootstrap 5 — SPK MonitorChoice (SAW, WP &amp; SMART).
+      </footer>
     </div>
   </main>
 
-  <script type="module" src="assets/js/app.js?v=20260414a"></script>
+  <script type="module" src="assets/js/app.js?v=20260428a"></script>
 </body>
 
 </html>

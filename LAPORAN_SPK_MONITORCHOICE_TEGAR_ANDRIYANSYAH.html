@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Laporan SPK MonitorChoice</title>
+<style>
+body { font-family: Arial, Helvetica, sans-serif; line-height: 1.5; color: #111; margin: 28px; }
+h1, h2, h3 { color: #0f172a; margin-top: 1.1em; }
+h1 { font-size: 24px; }
+h2 { font-size: 20px; }
+h3 { font-size: 17px; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+th, td { border: 1px solid #cbd5e1; padding: 8px; font-size: 12px; }
+code { background:#f1f5f9; padding: 2px 4px; border-radius: 4px; }
+pre { background:#f8fafc; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; overflow:auto; }
+hr { border: none; border-top: 1px solid #cbd5e1; margin: 20px 0; }
+ul, ol { margin-top: 0; }
+</style>
+</head>
+<body>
+<h1 id="laporan-proyek">LAPORAN PROYEK</h1>
+<h2 id="sistem-pendukung-keputusan-pemilihan-monitor-terbaik">Sistem Pendukung Keputusan Pemilihan Monitor Terbaik</h2>
+<h2 id="metode-simple-additive-weighting-saw">Metode Simple Additive Weighting (SAW)</h2>
+<hr />
+<h2 id="identitas-mahasiswa">Identitas Mahasiswa</h2>
+<ul>
+<li><strong>Nama</strong>: Tegar Andriyansyah  </li>
+<li><strong>NIM</strong>: 231011402038  </li>
+<li><strong>Kelas</strong>: 06 TPLP 006  </li>
+<li><strong>Mata Kuliah</strong>: Sistem Pengambil Keputusan  </li>
+<li><strong>Judul Proyek</strong>: Rekomendasi Monitor Terbaik metode SPK</li>
+</ul>
+<hr />
+<h2 id="abstrak">Abstrak</h2>
+<p>Proyek ini membangun sistem pendukung keputusan (SPK) berbasis web untuk membantu pemilihan monitor terbaik secara objektif menggunakan metode <strong>Simple Additive Weighting (SAW)</strong>. Sistem menggunakan 10 data monitor dummy dan 5 kriteria penilaian, yaitu harga, resolusi, refresh rate, ukuran layar, dan garansi. Proses SAW dilakukan melalui tahapan normalisasi, pembobotan, lalu perankingan berdasarkan nilai preferensi tertinggi. Implementasi dibangun menggunakan HTML, CSS, JavaScript (Vanilla), dan Bootstrap agar ringan, responsif, serta mudah dipresentasikan pada kebutuhan akademik.</p>
+<hr />
+<h2 id="bab-i-pendahuluan">BAB I - Pendahuluan</h2>
+<h3 id="11-latar-belakang">1.1 Latar Belakang</h3>
+<p>Pemilihan monitor sering dilakukan secara subjektif tanpa metode kuantitatif yang jelas. Akibatnya, keputusan dapat kurang optimal karena tidak mempertimbangkan semua kriteria secara terstruktur. Dengan SPK metode SAW, setiap alternatif monitor dapat dihitung nilainya secara sistematis.</p>
+<h3 id="12-rumusan-masalah">1.2 Rumusan Masalah</h3>
+<ol>
+<li>Bagaimana membangun sistem web sederhana untuk merekomendasikan monitor terbaik?</li>
+<li>Bagaimana menerapkan metode SAW pada data monitor dengan kriteria cost dan benefit?</li>
+<li>Bagaimana menampilkan hasil perhitungan secara transparan dan mudah dipahami?</li>
+</ol>
+<h3 id="13-tujuan">1.3 Tujuan</h3>
+<ol>
+<li>Membangun aplikasi SPK pemilihan monitor berbasis web responsif.</li>
+<li>Mengimplementasikan metode SAW dari input bobot hingga ranking akhir.</li>
+<li>Menyediakan hasil perhitungan (normalisasi dan nilai preferensi) yang dapat dipresentasikan.</li>
+</ol>
+<h3 id="14-batasan-masalah">1.4 Batasan Masalah</h3>
+<ul>
+<li>Data bersifat dummy (10 monitor), statis di frontend.</li>
+<li>Tidak ada login, database, atau API eksternal.</li>
+<li>Bobot dimasukkan user dan wajib total = 1.00.</li>
+<li>Hasil ditampilkan dalam bentuk ranking dan rekomendasi terbaik.</li>
+</ul>
+<hr />
+<h2 id="bab-ii-landasan-teori">BAB II - Landasan Teori</h2>
+<h3 id="21-sistem-pendukung-keputusan-spk">2.1 Sistem Pendukung Keputusan (SPK)</h3>
+<p>SPK adalah sistem yang membantu pengambil keputusan dengan memanfaatkan data dan model perhitungan untuk menghasilkan rekomendasi yang rasional.</p>
+<h3 id="22-metode-simple-additive-weighting-saw">2.2 Metode Simple Additive Weighting (SAW)</h3>
+<p>SAW adalah metode penjumlahan terbobot dari nilai kinerja tiap alternatif terhadap seluruh kriteria.</p>
+<h4 id="a-normalisasi">a) Normalisasi</h4>
+<ul>
+<li>Untuk <strong>Benefit</strong>:<br />
+  [
+  R_{ij} = \frac{X_{ij}}{\max(X_j)}
+  ]</li>
+<li>Untuk <strong>Cost</strong>:<br />
+  [
+  R_{ij} = \frac{\min(X_j)}{X_{ij}}
+  ]</li>
+</ul>
+<h4 id="b-nilai-preferensi">b) Nilai Preferensi</h4>
+<p>[
+V_i = \sum_{j=1}^{n}(W_j \times R_{ij})
+]</p>
+<p>Alternatif dengan nilai (V_i) terbesar menjadi rekomendasi terbaik.</p>
+<h3 id="23-kriteria-dan-bobot">2.3 Kriteria dan Bobot</h3>
+<table>
+<thead>
+<tr>
+<th>Kode</th>
+<th>Kriteria</th>
+<th>Tipe</th>
+<th style="text-align: right;">Bobot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>Harga</td>
+<td>Cost</td>
+<td style="text-align: right;">0.25</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>Resolusi</td>
+<td>Benefit</td>
+<td style="text-align: right;">0.25</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>Refresh Rate</td>
+<td>Benefit</td>
+<td style="text-align: right;">0.20</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>Ukuran Layar</td>
+<td>Benefit</td>
+<td style="text-align: right;">0.15</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>Garansi</td>
+<td>Benefit</td>
+<td style="text-align: right;">0.15</td>
+</tr>
+</tbody>
+</table>
+<p>Total bobot = <strong>1.00</strong>.</p>
+<hr />
+<h2 id="bab-iii-analisis-dan-perancangan-sistem">BAB III - Analisis dan Perancangan Sistem</h2>
+<h3 id="31-kebutuhan-fungsional">3.1 Kebutuhan Fungsional</h3>
+<ol>
+<li>Menampilkan data 10 monitor pada tabel responsif.</li>
+<li>Menerima input bobot 5 kriteria.</li>
+<li>Memvalidasi bobot (numerik, non-negatif, total = 1.00 dengan toleransi ±0.001).</li>
+<li>Menghitung SAW (normalisasi, nilai preferensi, ranking).</li>
+<li>Menampilkan:</li>
+<li>ranking monitor,</li>
+<li>rekomendasi terbaik,</li>
+<li>detail matriks normalisasi dan nilai preferensi (toggle).</li>
+<li>Reset ke kondisi awal.</li>
+</ol>
+<h3 id="32-kebutuhan-non-fungsional">3.2 Kebutuhan Non-Fungsional</h3>
+<ul>
+<li>UI responsif (mobile, tablet, desktop).</li>
+<li>Tidak membutuhkan build tool/backend.</li>
+<li>Perhitungan cepat di sisi browser.</li>
+<li>Struktur kode mudah dipahami untuk evaluasi akademik.</li>
+</ul>
+<h3 id="33-arsitektur-sistem">3.3 Arsitektur Sistem</h3>
+<p>Arsitektur bersifat <strong>single-page frontend</strong>:
+- <code>index.html</code> -&gt; struktur UI
+- <code>assets/css/styles.css</code> -&gt; styling responsif
+- <code>assets/js/app.js</code> -&gt; data, validasi, algoritma SAW, rendering hasil</p>
+<h3 id="34-alur-kerja-sistem">3.4 Alur Kerja Sistem</h3>
+<ol>
+<li>Halaman memuat data monitor dan bobot default.</li>
+<li>User dapat ubah bobot.</li>
+<li>Klik <strong>Hitung SAW</strong>.</li>
+<li>Sistem validasi bobot.</li>
+<li>Jika valid, sistem hitung normalisasi dan nilai preferensi.</li>
+<li>Sistem urutkan nilai dari tertinggi ke terendah.</li>
+<li>Sistem tampilkan monitor terbaik.</li>
+</ol>
+<hr />
+<h2 id="bab-iv-implementasi">BAB IV - Implementasi</h2>
+<h3 id="41-teknologi">4.1 Teknologi</h3>
+<ul>
+<li>HTML5</li>
+<li>CSS3</li>
+<li>Bootstrap 5.3.3</li>
+<li>JavaScript (Vanilla)</li>
+<li>Hosting: GitHub + Vercel</li>
+</ul>
+<h3 id="42-struktur-data-monitor">4.2 Struktur Data Monitor</h3>
+<p>Sistem menggunakan 10 alternatif monitor berikut:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">ID</th>
+<th>Nama</th>
+<th style="text-align: right;">Harga</th>
+<th style="text-align: right;">Resolusi</th>
+<th style="text-align: right;">Refresh</th>
+<th style="text-align: right;">Ukuran</th>
+<th style="text-align: right;">Garansi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>ViewSonic VX2458</td>
+<td style="text-align: right;">1,800,000</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>AOC 24G2SP</td>
+<td style="text-align: right;">2,500,000</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">165</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>LG 27UP850</td>
+<td style="text-align: right;">4,800,000</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>Xiaomi Mi 2K</td>
+<td style="text-align: right;">2,900,000</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td>Samsung Odyssey G3</td>
+<td style="text-align: right;">2,300,000</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">144</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>Dell P2723D</td>
+<td style="text-align: right;">4,200,000</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td>Asus VG279Q1A</td>
+<td style="text-align: right;">3,100,000</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">165</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td>HP VH24</td>
+<td style="text-align: right;">1,600,000</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>Philips 275E2FAE</td>
+<td style="text-align: right;">2,700,000</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td>BenQ GW2785TC</td>
+<td style="text-align: right;">3,500,000</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-aturan-implementasi-penting">4.3 Aturan Implementasi Penting</h3>
+<ol>
+<li><strong>Toleransi bobot</strong>: total bobot diverifikasi dengan toleransi ±0.001.</li>
+<li><strong>Input lokal Indonesia</strong>: format desimal koma (contoh <code>0,25</code>) didukung.</li>
+<li><strong>Penanganan error</strong>:</li>
+<li>bobot bukan angka,</li>
+<li>bobot negatif,</li>
+<li>total bobot tidak sama dengan 1,</li>
+<li>pembagi nol pada normalisasi.</li>
+<li><strong>Tie-break ranking</strong>: jika skor sama, urutan berdasarkan <code>id</code> terkecil.</li>
+<li><strong>Presisi tampil</strong>: skor ditampilkan hingga 4 desimal.</li>
+</ol>
+<hr />
+<h2 id="bab-v-perhitungan-saw-detail">BAB V - Perhitungan SAW (Detail)</h2>
+<h3 id="51-parameter-normalisasi">5.1 Parameter Normalisasi</h3>
+<p>Dari dataset:
+- (\min(C1) = 1.600.000)
+- (\max(C2) = 100)
+- (\max(C3) = 165)
+- (\max(C4) = 27)
+- (\max(C5) = 3)</p>
+<h3 id="52-contoh-normalisasi-alternatif-a2-aoc-24g2sp">5.2 Contoh Normalisasi (Alternatif A2 - AOC 24G2SP)</h3>
+<p>Data A2: harga=2.500.000, resolusi=75, refresh=165, ukuran=24, garansi=2.</p>
+<p>[
+R_{21} = 1.600.000 / 2.500.000 = 0.6400
+]
+[
+R_{22} = 75 / 100 = 0.7500
+]
+[
+R_{23} = 165 / 165 = 1.0000
+]
+[
+R_{24} = 24 / 27 = 0.8889
+]
+[
+R_{25} = 2 / 3 = 0.6667
+]</p>
+<p>Nilai preferensi A2:
+[
+V_2 = (0.25\times0.6400)+(0.25\times0.7500)+(0.20\times1.0000)+(0.15\times0.8889)+(0.15\times0.6667)
+]
+[
+V_2 = 0.7808
+]</p>
+<h3 id="53-contoh-perbandingan-alternatif-a8-hp-vh24">5.3 Contoh Perbandingan (Alternatif A8 - HP VH24)</h3>
+<p>Normalisasi A8:
+- C1=1.0000, C2=0.7000, C3=0.3636, C4=0.8889, C5=0.3333</p>
+<p>Nilai preferensi:
+[
+V_8 = 0.6811
+]</p>
+<p>Ini menunjukkan bahwa harga murah saja tidak cukup jika kriteria benefit lain (refresh, garansi) lebih rendah.</p>
+<h3 id="54-hasil-ranking-akhir-bobot-default">5.4 Hasil Ranking Akhir (Bobot Default)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Rank</th>
+<th style="text-align: right;">ID</th>
+<th>Nama Monitor</th>
+<th style="text-align: right;">Nilai V</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td>AOC 24G2SP</td>
+<td style="text-align: right;">0.7808</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+<td>Samsung Odyssey G3</td>
+<td style="text-align: right;">0.7693</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td>Asus VG279Q1A</td>
+<td style="text-align: right;">0.7665</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1</td>
+<td>ViewSonic VX2458</td>
+<td style="text-align: right;">0.7340</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3</td>
+<td>LG 27UP850</td>
+<td style="text-align: right;">0.7061</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">9</td>
+<td>Philips 275E2FAE</td>
+<td style="text-align: right;">0.7016</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">8</td>
+<td>HP VH24</td>
+<td style="text-align: right;">0.6811</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">6</td>
+<td>Dell P2723D</td>
+<td style="text-align: right;">0.6805</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">10</td>
+<td>BenQ GW2785TC</td>
+<td style="text-align: right;">0.6745</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">4</td>
+<td>Xiaomi Mi 2K</td>
+<td style="text-align: right;">0.6413</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rekomendasi sistem</strong>: <strong>AOC 24G2SP</strong> (Rank 1).</p>
+<hr />
+<h2 id="bab-vi-pengujian-sistem">BAB VI - Pengujian Sistem</h2>
+<h3 id="61-pengujian-fungsional">6.1 Pengujian Fungsional</h3>
+<p>Pengujian dilakukan melalui skrip Node test pada <code>tests/ui-structure.test.js</code>, mencakup:
+1. Viewport meta mobile.
+2. Integrasi Bootstrap.
+3. Ketersediaan selector utama.
+4. Struktur hero menyatu dengan kartu data.
+5. Tabel dibungkus <code>table-responsive</code>.
+6. Aksesibilitas form input.
+7. Atribut toggle detail (<code>aria-controls</code>, <code>aria-expanded</code>).
+8. Media query mobile-first.
+9. Identitas mahasiswa dan judul sistem tampil.
+10. Guard overflow mobile untuk kolom dan tabel.</p>
+<p>Hasil: <strong>lulus</strong> (semua test pass pada implementasi terbaru).</p>
+<h3 id="62-pengujian-deployment">6.2 Pengujian Deployment</h3>
+<ul>
+<li>Source code dipush ke GitHub.</li>
+<li>Deploy production di Vercel (<code>monitorchoice-skp.vercel.app</code>).</li>
+<li>Verifikasi HTTP status 200 dan konten live sesuai update terbaru.</li>
+</ul>
+<hr />
+<h2 id="bab-vii-kesimpulan-dan-saran">BAB VII - Kesimpulan dan Saran</h2>
+<h3 id="71-kesimpulan">7.1 Kesimpulan</h3>
+<ol>
+<li>Sistem SPK pemilihan monitor berhasil dibangun dengan metode SAW.</li>
+<li>Proses perhitungan berjalan benar dari normalisasi hingga ranking.</li>
+<li>Hasil rekomendasi dapat dijelaskan secara matematis dan transparan.</li>
+<li>Sistem telah responsif di mobile dan cocok untuk kebutuhan tugas kuliah.</li>
+</ol>
+<h3 id="72-saran-pengembangan">7.2 Saran Pengembangan</h3>
+<ol>
+<li>Menambahkan fitur ekspor PDF laporan hasil ranking.</li>
+<li>Menambahkan penyimpanan data (database) untuk skenario non-dummy.</li>
+<li>Menambahkan pembanding metode lain (TOPSIS/AHP) untuk studi komparatif.</li>
+<li>Menambahkan login per pengguna jika sistem dikembangkan lebih lanjut.</li>
+</ol>
+<hr />
+<h2 id="lampiran-a-cara-menjalankan-sistem">Lampiran A - Cara Menjalankan Sistem</h2>
+<h3 id="lokal">Lokal</h3>
+<pre><code class="language-bash">python3 -m http.server 4173
+</code></pre>
+<p>Lalu buka: <code>http://localhost:4173</code></p>
+<h3 id="online">Online</h3>
+<ul>
+<li>GitHub: <code>https://github.com/g4rrzx/SKP</code></li>
+<li>Vercel: <code>https://monitorchoice-skp.vercel.app</code></li>
+</ul>
+<hr />
+<h2 id="lampiran-b-ringkasan-cara-kerja-sistem-singkat">Lampiran B - Ringkasan Cara Kerja Sistem (Singkat)</h2>
+<ol>
+<li>User isi bobot kriteria.</li>
+<li>Sistem validasi bobot.</li>
+<li>Sistem normalisasi semua kriteria sesuai tipe cost/benefit.</li>
+<li>Sistem hitung skor preferensi setiap monitor.</li>
+<li>Sistem urutkan skor dan tampilkan rekomendasi terbaik.</li>
+</ol>
+</body>
+</html>
